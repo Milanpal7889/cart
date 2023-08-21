@@ -3,10 +3,12 @@ import ProductContext from "./ProductContext";
 
 const ProductState = (props) => {
     const [productsState, setProductsState] = useState([])
-    const cartState = []
+    const cartState = localStorage.getItem("newCartStoreState")?JSON.parse(localStorage.getItem("newCartStoreState")):{
+        items : []
+    }
     const [input, setInput] = useState("")
     const [cartStoreState, setCartStoreState] = useState(
-        JSON.parse(localStorage.getItem("newCartStoreState"))
+        cartState
     );
    
       
