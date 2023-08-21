@@ -5,9 +5,9 @@ const ProductState = (props) => {
     const [productsState, setProductsState] = useState([])
     const cartState = []
     const [input, setInput] = useState("")
-    const [cartStoreState, setCartStoreState] = useState({
-        items: []
-    });
+    const [cartStoreState, setCartStoreState] = useState(
+        JSON.parse(localStorage.getItem("newCartStoreState"))
+    );
    
       
     const emptyInput = ""
@@ -65,7 +65,7 @@ const ProductState = (props) => {
                     items: updatedCart
                 });
             }
-    
+            localStorage.setItem("newCartStoreState",JSON.stringify(cartStoreState))
             setInput("");
         } catch (error) {
             console.error("Error updating cart:", error);
