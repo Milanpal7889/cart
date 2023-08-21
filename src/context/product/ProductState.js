@@ -11,6 +11,7 @@ const ProductState = (props) => {
    
       
     const emptyInput = ""
+   
 
 
     useEffect(() => {
