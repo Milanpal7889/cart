@@ -62,6 +62,11 @@ const RemoveBtn = styled.button`
   }
 `;
 
+  const newRemoveFromCart=(id)=>{
+    removeFromCart(id)
+    localStorage.setItem("newCartStoreState",JSON.stringify(cartStoreState))
+  }
+
   return (
     <div>
       {cartStoreState.items.map((product) => {
@@ -80,7 +85,7 @@ const RemoveBtn = styled.button`
             <ProductPrice>Total: ${product.price*product.productQuantity}</ProductPrice>
             <RemoveBtn
               onClick={() => {
-                removeFromCart(product.id);
+                newRemoveFromCart(product.id);
               }}
             >
               remove

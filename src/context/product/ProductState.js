@@ -41,9 +41,12 @@ const ProductState = (props) => {
             return {
                 items: updatedItems
             };
-        });
+        }); 
     };
     
+    useEffect(()=>{
+        localStorage.setItem("newCartStoreState",JSON.stringify(cartStoreState))
+    },[cartStoreState])
     
     const setCartStatefunction = (productArray) => {
         try {
@@ -55,7 +58,7 @@ const ProductState = (props) => {
                 const newCartState = [...cartStoreState.items, newProductArray];
                 setCartStoreState({
                     items: newCartState
-                });
+                })
             } else {
                 const updatedCart = cartStoreState.items.map(item => {
                     if (item.id === idState) {
@@ -65,9 +68,8 @@ const ProductState = (props) => {
                 });
                 setCartStoreState({
                     items: updatedCart
-                });
+                })
             }
-            localStorage.setItem("newCartStoreState",JSON.stringify(cartStoreState))
             setInput("");
         } catch (error) {
             console.error("Error updating cart:", error);

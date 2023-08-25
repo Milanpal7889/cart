@@ -64,7 +64,7 @@ width: 100%;
 
 const Products = () => {
   const context = useContext(ProductContext);
-  const { getProductsState, productsState, setCartStatefunction, setInput } =
+  const { getProductsState, productsState,cartStoreState, setCartStatefunction, setInput } =
     context;
 
   const onChange = (event) => {
@@ -74,6 +74,16 @@ const Products = () => {
   useEffect(() => {
     getProductsState();
   }, []);
+
+  
+
+
+  const newSetCartStatefunction = (product) => {
+    setCartStatefunction(product)
+    localStorage.setItem("newCartStoreState",JSON.stringify(cartStoreState))
+  }
+
+
   return (
     <MainPage>
     
@@ -94,7 +104,7 @@ const Products = () => {
             ></ProductQuantity>
             <AddToCart
               onClick={() => {
-                setCartStatefunction(product);
+                newSetCartStatefunction(product);
               }}
             >
               Add to cart
