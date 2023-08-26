@@ -2,18 +2,41 @@ import React, { useEffect, useState } from "react";
 import ProductContext from "./ProductContext";
 
 const ProductState = (props) => {
+    const host = "http://localhost:5000";
     const [productsState, setProductsState] = useState([])
     const cartState = localStorage.getItem("newCartStoreState")?JSON.parse(localStorage.getItem("newCartStoreState")):{
         items : []
     }
+    let { authToken } = localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):"";
     const [input, setInput] = useState("")
     const [cartStoreState, setCartStoreState] = useState(
         cartState
     );
+    const [testing, setTesting]=useState([])
    
       
     const emptyInput = ""
 
+
+    const getCartFromDb = async()=>{
+        const response = await fetch(`${host}/api/products/fetchproducts`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authToken': getToken()        
+            }
+        })
+        const json = await response.json()
+        setTesting(json)
+        console.log(testing)
+    }
+    
+
+
+    //get token
+    let getToken = () =>{
+        return authToken
+     }
 
     useEffect(() => {
         getProductsState(); // Fetch products when component mounts
@@ -89,7 +112,8 @@ const ProductState = (props) => {
                 cartState,
                 input,
                 setInput,
-                removeFromCart
+                removeFromCart,
+                getCartFromDb
             }}>
 
             {props.children}
