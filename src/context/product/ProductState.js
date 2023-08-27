@@ -12,36 +12,28 @@ const ProductState = (props) => {
     const [cartStoreState, setCartStoreState] = useState(
         cartState
     );
-    const [testing, setTesting]=useState([])
-   
-      
+    const [testing, setTesting]=useState([])  
     const emptyInput = ""
+
+    //get token
+    let getToken = () =>{
+        console.log(authToken)
+       return authToken
+    }
 
 
     const getCartFromDb = async()=>{
-        const response = await fetch(`${host}/api/products/fetchproducts`, {
+        const response = await fetch(`${host}/api/product/fetchcart`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'authToken': getToken()        
+                'authToken': getToken()
             }
         })
         const json = await response.json()
         setTesting(json)
-        console.log(testing)
     }
     
-
-
-    //get token
-    let getToken = () =>{
-        return authToken
-     }
-
-    useEffect(() => {
-        getProductsState(); // Fetch products when component mounts
-    }, []);
-
 
     const getProductsState = async () => {
         try {
